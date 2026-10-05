@@ -1,0 +1,18 @@
+=== GRADE REPORT ===
+Valid students: 4 | Skipped lines: 4
+
+--- Students ---
+Student Name: Aisha, Average Score: 85.00, Letter Grade: A
+Student Name: Bob, Average Score: 71.67, Letter Grade: B
+Student Name: Eli, Average Score: 55.00, Letter Grade: F
+Student Name: Farah, Average Score: 91.00, Letter Grade: A
+
+Class average: 75.67
+Top student: Student Name: Farah, Average Score: 91.00, Letter Grade: A
+Grade counts: {'A': 2, 'B': 1, 'C': 0, 'F': 1}
+
+--- Skipped lines ---
+Skipped: Cy,90,abc,88, Because: Cannot parse scores!
+Skipped: Dana,100,95, Because: Line must contain 4 parts: name, score1, score2, score3
+Skipped: ,60,70,80, Because: Name cannot be empty!
+Skipped: Gus,-5,70,60, Because: Score -5 is out of range! Must be between 0 and 100.

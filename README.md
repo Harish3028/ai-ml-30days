@@ -1,17 +1,3 @@
-#AI/ML Learning Process - October 2026
-
-3-hours a day journey from Python to RAG, LLM, LangGraph, LangChain and fine-tuning.
-
-## Setup
-
-    pythong -m venv .venv
-    .venv\Scripts\activate
-    pip install -r requirements.txt
-
-## Progress
-
-- [x] Day 0: Environment setup
-
 - [x] Day 0: Environment setup
 - [x] Day 1: Python for Java developers
   - Functions (`def`), list / dict / tuple / set
@@ -20,11 +6,16 @@
   - File handling: reading and writing with `open`
   - Classes, inheritance, and `__str__`
   - Modules: `__name__ == "__main__"`
-
-  - Mini-project: Grade Tracker (`mini-project-day1/day01_grade_tracker`)
+  - Mini-project: Grade Tracker (`src/mini-projects/Day01`)
     - Reads a messy score file, skips invalid lines with reasons, and writes a grade report
     - Uses validation with `raise ValueError`, plus new tools `lambda` and `strip()`
-    - Run: `python mini-project-day1\day01_grade_tracker\grade_tracker.py`
+    - Run: `python src\mini-projects\Day01\grade_tracker.py`
 
-
-
+- [x] Day 2: NumPy foundations
+  - Arrays vs Python lists, and vectorized math
+  - Reproducible randomness: `np.random.default_rng(42)`
+  - Array attributes: `shape`, `size`, `ndim`, `dtype`
+  - Indexing and slicing (slices are views, not copies)
+  - Boolean masks and `np.where`
+  - `reshape` and the `axis` argument
+  - Broadcasting

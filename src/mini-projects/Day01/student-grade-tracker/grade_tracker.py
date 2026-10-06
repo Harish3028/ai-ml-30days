@@ -83,8 +83,8 @@ def save_report(lines, filename):
         file.write("\n".join(lines) + "\n")
 
 if __name__ == "__main__":
-    students, skipped = load_students("src/mini-projects/Day01/students_raw.txt")
+    students, skipped = load_students("src/mini-projects/Day01/student-grade-tracker/students_raw.txt")
     report = build_report(students, skipped)
     print("\n".join(report))
-    save_report(report, "src/mini-projects/Day01/report.txt")
-    print("\nReport saved to src/mini-projects/Day01/report.txt")
+    save_report(report, "src/mini-projects/Day01/student-grade-tracker/report.txt")
+    print("\nReport saved to src/mini-projects/Day01/student-grade-tracker/report.txt")

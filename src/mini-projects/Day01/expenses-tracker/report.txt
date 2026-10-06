@@ -1,0 +1,21 @@
+=== EXPENSE REPORT ===
+Valid: 0 | Skipped: 5
+
+--- Expenses ---
+
+Total spent: 0.00
+Average expense: 0.00
+Biggest expense: None
+
+--- By category ---
+Food: 0.00
+Transport: 0.00
+Rent: 0.00
+Fun: 0.00
+
+--- Skipped lines ---
+Skipped: 2026-10-03,Food,abc, Because: Amount must be a number: abc
+Skipped: 2026-10-04,Transport, Because: There Must Be Exactly Contain 3 Parts!
+Skipped: ,Food,10.00, Because: Date Cannot Be Empty!
+Skipped: 2026-10-05,Fun,-15.00, Because: Invalid Amount!
+Skipped: 2026-10-06,Games,40.00, Because: Invalid Category!

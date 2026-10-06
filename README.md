@@ -6,10 +6,14 @@
   - File handling: reading and writing with `open`
   - Classes, inheritance, and `__str__`
   - Modules: `__name__ == "__main__"`
-  - Mini-project: Grade Tracker (`src/mini-projects/Day01`)
+  - Mini-project: Grade Tracker (`src/mini-projects/Day01/student-grade-tracker`)
     - Reads a messy score file, skips invalid lines with reasons, and writes a grade report
     - Uses validation with `raise ValueError`, plus new tools `lambda` and `strip()`
-    - Run: `python src\mini-projects\Day01\grade_tracker.py`
+    - Run: `python src\mini-projects\Day01\student-grade-tracker\grade_tracker.py`
+  - Practice project: Expense Tracker (`src/mini-projects/Day01/expenses-tracker`)
+    - Reads a messy expenses file, skips invalid lines with reasons, and writes an expense report
+    - Same pipeline as the Grade Tracker, plus `float()` for amounts and a dict for category totals
+    - Run: `python src\mini-projects\Day01\expenses-tracker\expense_tracker.py`
 
 - [x] Day 2: NumPy foundations
   - Arrays vs Python lists, and vectorized math

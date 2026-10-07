@@ -23,3 +23,24 @@
   - Boolean masks and `np.where`
   - `reshape` and the `axis` argument
   - Broadcasting
+  - Mini-project: Exam Analyzer (`src/mini-projects/Day02/exam-analyzer`)
+    - Analyzes a matrix of student scores and saves a text report
+    - Uses `axis`, `argmax`, `argmin`, `argsort`, `np.where` and `np.minimum`
+    - Run: `python src\mini-projects\Day02\exam-analyzer\exam_analyzer.py`
+  - Practice project: Sales Analyzer (`src/mini-projects/Day02/sales-analyzer`)
+    - Analyzes units sold per product and month, with revenue, tiers, growth and a saved report
+    - Uses broadcasting with a `(6, 1)` column, `np.diff`, `np.cumsum`, `keepdims=True`, `any` and `all`
+    - Run: `python src\mini-projects\Day02\sales-analyzer\sales_analyzer.py`
+    
+- [x] Day 3: Pandas
+  - `Series`, `DataFrame` and reading CSV files
+  - Selecting with `.loc` and `.iloc`, filtering with boolean masks, `sort_values`
+  - `groupby` with named aggregation, and `merge` (`left`, `inner`, `outer`)
+  - Missing values: `isna`, `dropna(subset=...)`, `fillna`
+  - Duplicates: `duplicated` and `drop_duplicates`
+  - Cleaning text with `.str.strip().str.title()`
+  - Fixing types with `pd.to_numeric` and `pd.to_datetime` (`errors="coerce"`)
+  - Mini-project: Messy Orders Cleaner (`src/mini-projects/Day03/orders-cleaner`)
+    - Cleans a messy orders CSV step by step, logs how many rows each step removes, and saves `orders_clean.csv` and `report.txt`
+    - Uses text cleaning, `errors="coerce"`, duplicate and outlier removal, `groupby` summaries and a category `merge`
+    - Run: `python src\mini-projects\Day03\orders-cleaner\orders_cleaner.py`

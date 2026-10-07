@@ -1,0 +1,8 @@
+order_id,customer,city,product,quantity,price,order_date,revenue
+1001,Aisha,Kuala Lumpur,Laptop,1.0,3200.0,2026-09-01,3200.0
+1002,Bob,Kuala Lumpur,Mouse,2.0,45.5,2026-09-02,91.0
+1003,Cy,Penang,Keyboard,1.0,120.0,2026-09-02,120.0
+1004,Dana,Penang,Monitor,2.0,850.0,2026-09-03,1700.0
+1009,Ivan,Kuala Lumpur,Monitor,1.0,850.0,2026-09-06,850.0
+1010,Jia,Penang,Laptop,1.0,3200.0,2026-09-07,3200.0
+1012,Lee,Johor Bahru,Headset,2.0,95.0,2026-09-08,190.0

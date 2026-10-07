@@ -1,0 +1,15 @@
+order_id,customer,city,product,quantity,price,order_date
+1001,aisha ,Kuala Lumpur,Laptop,1,3200,2026-09-01
+1002,BOB,kuala lumpur,Mouse,2,45.5,2026-09-02
+1003,Cy,Penang,Keyboard,1,120,2026-09-02
+1004,Dana,Penang,Monitor,2,850,2026-09-03
+1005,Eli,Johor Bahru,Mouse,,45.5,2026-09-03
+1006,Farah,Kuala Lumpur,Laptop,1,TBD,2026-09-04
+1002,BOB,kuala lumpur,Mouse,2,45.5,2026-09-02
+1007,Gus,Penang,keyboard,-1,120,2026-09-05
+1008,Hana,Johor Bahru,Headset,3,95,2026-13-45
+1009,Ivan,Kuala Lumpur,Monitor,1,850,2026-09-06
+1003,Cy ,penang,Keyboard,1,120,2026-09-02
+1010,Jia,PENANG,Laptop,1,3200,2026-09-07
+1011,Kim,Kuala Lumpur,Mouse,500,45.5,2026-09-07
+1012,Lee,Johor Bahru,headset,2,95,2026-09-08

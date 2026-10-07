@@ -1,0 +1,31 @@
+=== ORDERS CLEANING REPORT ===
+
+--- Cleaning log ---
+loaded: 14 rows
+clean text: 14 rows (removed 0)
+convert types: 14 rows (removed 0)
+drop duplicates: 12 rows (removed 2)
+drop missing: 9 rows (removed 3)
+drop quantity <= 0: 8 rows (removed 1)
+add revenue: 8 rows (removed 0)
+drop outliers: 7 rows (removed 1)
+
+Clean orders: 7 | Unique customers: 7
+Total revenue: 9351.00
+Date range: 2026-09-01 to 2026-09-08
+
+--- Revenue by city ---
+Penang: 5020.00 (orders: 3)
+Kuala Lumpur: 4141.00 (orders: 3)
+Johor Bahru: 190.00 (orders: 1)
+
+--- Revenue by product ---
+Laptop: 6400.00 (units: 2)
+Monitor: 2550.00 (units: 3)
+Headset: 190.00 (units: 2)
+Keyboard: 120.00 (units: 1)
+Mouse: 91.00 (units: 2)
+
+--- Revenue by category ---
+Computer: 8950.00
+Accessory: 401.00

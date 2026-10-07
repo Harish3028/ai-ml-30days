@@ -1,0 +1,30 @@
+=== EXAM ANALYSIS ===
+Students: 8 | Exams: 4
+Overall mean: 77.22 | Std: 15.65
+
+--- Per exam ---
+Quiz: mean 76.12, max 100, min 45
+Midterm: mean 76.25, max 95, min 55
+Project: mean 78.50, max 98, min 48
+Final: mean 78.00, max 97, min 52
+
+--- Per student ---
+Aisha: 85.75, (A)
+Bob: 71.75, (B)
+Cy: 81.00, (A)
+Dana: 97.50, (A)
+Eli: 56.25, (F)
+Farah: 89.50, (A)
+Gus: 56.75, (F)
+Hana: 79.25, (B)
+
+--- Highlights ---
+Best student: Dana (97.50)
+Worst student: Eli (56.25)
+Top 3: Dana, Farah, Aisha
+Hardest exam: Quiz (mean 76.12)
+Easiest exam: Project (mean 78.50)
+Passed: 6 of 8 (75.0 percent)
+Below 60 in any exam: Cy, Eli, Gus
+Grade counts: {'A': 4, 'B': 2, 'C': 0, 'F': 2}
+Most improved: Gus (+7)

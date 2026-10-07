@@ -1,0 +1,30 @@
+=== SALES ANALYSIS ===
+Products: 6 | Months: 6
+Total units: 4438 | Total revenue: 30886.50
+
+--- Per product ---
+Pen: 2210 units, revenue 3315.00, Niche
+Notebook: 1080 units, revenue 4320.00, Core
+Backpack: 350 units, revenue 8750.00, Star
+Lamp: 198 units, revenue 3564.00, Niche
+Mouse: 475 units, revenue 5937.50, Core
+Headset: 125 units, revenue 5000.00, Core
+
+--- Per month ---
+Jan: 607 units, revenue 3760.00
+Feb: 608 units, revenue 3952.50
+Mar: 685 units, revenue 4625.00
+Apr: 807 units, revenue 5417.50
+May: 825 units, revenue 6267.50
+Jun: 906 units, revenue 6864.00
+
+--- Highlights ---
+Best product by units: Pen (2210)
+Best month by units: Jun (906)
+Top 3 by revenue: Backpack, Mouse, Headset
+Fastest growing: Headset (+133.3 percent)
+Slowest growing: Notebook (+26.7 percent)
+Biggest jump in total units: Apr (+122)
+Any month below 50: Backpack, Lamp, Headset
+Steady sellers (100+ every month): Pen, Notebook
+Peak months: Jun May Jun Apr Jun May

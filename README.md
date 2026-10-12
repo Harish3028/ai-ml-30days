@@ -93,4 +93,4 @@
     - Mini-project: Leakage-safe ML Workflow on Titanic (`src/mini-projects/Day07/`)
       - Runs the full workflow: split, baseline, model, evaluation, Pipeline and a deliberate leak check
       - Uses scikit-learn's `LogisticRegression` as a black box (studied on Day 9)
-      - Run: Open `src\mini-projects\Day07\`
+      - Run: Open `src\mini-projects\Day07\ml-workflow\ml_workflow` and Run All

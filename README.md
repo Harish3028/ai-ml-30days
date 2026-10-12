@@ -41,6 +41,56 @@
   - Cleaning text with `.str.strip().str.title()`
   - Fixing types with `pd.to_numeric` and `pd.to_datetime` (`errors="coerce"`)
   - Mini-project: Messy Orders Cleaner (`src/mini-projects/Day03/orders-cleaner`)
-    - Cleans a messy orders CSV step by step, logs how many rows each step removes, and saves `orders_clean.csv` and `report.txt`
-    - Uses text cleaning, `errors="coerce"`, duplicate and outlier removal, `groupby` summaries and a category `merge`
+    - Cleans a messy orders CSV step by step, logs how many rows each step removes, and saves
+      `orders_clean.csv` and `report.txt` 
+    - Uses text cleaning, `errors="coerce"`, duplicate and outlier removal, `groupby` summaries and a
+      category `merge`
     - Run: `python src\mini-projects\Day03\orders-cleaner\orders_cleaner.py`
+
+- [x] Day 4: Data cleaning and EDA
+    - EDA health check: shape, types, `isna`, `duplicated`, `describe`, `value_counts`
+    - Imputation distorts distributions (the Titanic age spike), and an outlier is not always an error
+    - Distributions and outliers with histograms, boxplots and the IQR rule
+    - Comparing groups with `groupby` and `pd.crosstab`; `groupby(B)[A].mean()` gives P(A | B)
+    - Encoding text as numbers (`is_female`), the correlation matrix and heatmap (`.corr()` works only on 
+      numbers)
+    - Rates vs counts, and Simpson's paradox (bill length vs bill depth)
+    - Mini-project: Penguins EDA (`src/mini-projects/Day04/`)
+      - Health check, cleaning decisions, distributions, group comparisons, relationships and written findings
+        with numbers
+      - Uses Matplotlib and Seaborn charts, `crosstab`, `groupby`, a correlation heatmap and a Findings cell
+      - Run: Open `src\mini-projects\Day04\penguins-eda\penguins_eda.ipynb` and Run All
+
+- [x] Day 5: Statistics and probability
+    - Mean, median, mode, variance and std (`n` in NumPy vs `n - 1` in pandas)
+    - Percentiles (`np.percentile`, `.quantile`), percentile rank, Q1 / Q3 and the IQR fences
+    - Covariance, correlation, z-score and the normal distribution (68-95-99.7 rule)
+    - Probability basics: law of large numbers, "not" / "and" rules, conditional probability
+    - Why the 3-std rule needs enough data, and how an outlier inflates its own mean and std
+    - Mini-project: Diamonds Outliers (`src/mini-projects/Day05/`)
+      - Compares the IQR rule and the z-score rule on 53,940 diamonds across 7 columns
+      - Uses my own `iqr_mask` and `z_mask` functions, fences for price, and a check of errors vs real extreme
+        values
+      - Run: Open `src\mini-projects\Day06\diamond-outliers\diamond_outliers.ipynb` and Run All
+
+- [x] Day 6: Math for ML (vectors, derivatives, gradient descent)
+    - Scalars, vectors and matrices; the dot product as a weighted sum (`x @ w + b`)
+    - Matrix multiplication and its shape rule `(a, b) @ (b, c) -> (a, c)`
+    - Derivatives, partial derivatives and the gradient
+    - Gradient descent: `w = w - lr * dw`, `b = b - lr * db`
+    - Mini-project: Linear Regression from Scratch (`src/mini-projects/Day06/`)
+      - Fits `y = w*x + b` to 50 noisy points with NumPy only, then checks the result against `np.polyfit`
+      - Uses `predict`, `mse`, `gradients` and `train`, learning rate experiments (too small, right, too big)
+        and a loss curve
+      - Run: Open `src\mini-projects\Day06\linear-gradientDescent\linear_gradientDescent.ipynb` and Run All
+
+- [ ] Day 7: ML workflow and data leakage
+    - Features and label, and the train / validation / test split
+    - `train_test_split` with `random_state` and `stratify`
+    - Baseline model with `DummyClassifier`
+    - Filling missing values with `SimpleImputer`, using numbers from the training data only
+    - `Pipeline`, and how to spot data leakage (target leakage and preprocessing leakage)
+    - Mini-project: Leakage-safe ML Workflow on Titanic (`src/mini-projects/Day07/`)
+      - Runs the full workflow: split, baseline, model, evaluation, Pipeline and a deliberate leak check
+      - Uses scikit-learn's `LogisticRegression` as a black box (studied on Day 9)
+      - Run: Open `src\mini-projects\Day07\`

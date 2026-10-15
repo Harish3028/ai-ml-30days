@@ -71,7 +71,7 @@
       - Compares the IQR rule and the z-score rule on 53,940 diamonds across 7 columns
       - Uses my own `iqr_mask` and `z_mask` functions, fences for price, and a check of errors vs real extreme
         values
-      - Run: Open `src\mini-projects\Day06\diamond-outliers\diamond_outliers.ipynb` and Run All
+      - Run: Open `src\mini-projects\Day05\diamond-outliers\diamond_outliers.ipynb` and Run All
 
 - [x] Day 6: Math for ML (vectors, derivatives, gradient descent)
     - Scalars, vectors and matrices; the dot product as a weighted sum (`x @ w + b`)
@@ -84,7 +84,7 @@
         and a loss curve
       - Run: Open `src\mini-projects\Day06\linear-gradientDescent\linear_gradientDescent.ipynb` and Run All
 
-- [ ] Day 7: ML workflow and data leakage
+- [x] Day 7: ML workflow and data leakage
     - Features and label, and the train / validation / test split
     - `train_test_split` with `random_state` and `stratify`
     - Baseline model with `DummyClassifier`
@@ -93,4 +93,51 @@
     - Mini-project: Leakage-safe ML Workflow on Titanic (`src/mini-projects/Day07/`)
       - Runs the full workflow: split, baseline, model, evaluation, Pipeline and a deliberate leak check
       - Uses scikit-learn's `LogisticRegression` as a black box (studied on Day 9)
-      - Run: Open `src\mini-projects\Day07\ml-workflow\ml_workflow` and Run All
+      - Run: Open `src\mini-projects\Day07\ml-workflow\ml_workflow.ipynb` and Run All
+
+- [x] Day 8: Regression & Linear Regression
+  - Regression vs classification; `LinearRegression` with `.fit`, `.predict`, `.coef_` and `.intercept_`
+  - Regression metrics: MAE, MSE, RMSE and R² (R² below 0 means worse than the baseline)
+  - Text categories as numbers with `pd.get_dummies` (one-hot encoding), and feature engineering with ratio
+    columns.
+  - Polynomial regression with `PolynomialFeatures` and `StandardScaler`, and how overfitting shows up (train
+    score keeps rising while validation score gets worse)
+  - Train / validation / test split: compare models on validation, score the chosen model on test once
+  - Residual analysis: error by group, impossible (negative) predictions, and why one extreme row can wreck
+    the average error
+  - Mini-project: House-Price Regression (`src/mini-projects/Day08/`)
+    - Cleans 20,640 California housing districts (965 capped prices removed), adds 3 ratio features and
+      compares 4 models on validation
+    - Uses `Pipeline`, `SimpleImputer`, `PolynomialFeatures`, a `report` helper, a baseline and a residual
+      study of the final model
+    - Run: open `src\mini-projects\Day08\house-price-regression\house_price_regression.ipynb` and Run All
+
+- [x] Day 9: Classification and logistic regression
+  - Sigmoid, `LogisticRegression`, `predict_proba` vs `predict`, and the decision threshold
+  - Odds ratios with `np.exp(coef_)`, multiclass classification, and why `LinearRegression` is not a
+    good fit for classification
+  - Confusion matrix (TN, FP, FN, TP), accuracy, precision, recall and F1
+  - ROC-AUC, class imbalance, and the precision / recall trade-off when the threshold changes
+  - Mini-project: Telecom Churn Classifier (`src/mini-projects/Day09/churn-classifier/`)
+    - Predicts which of 7,043 customers will leave, then chooses the threshold on validation and scores the
+      chosen model on test once
+    - Uses `get_dummies`, `Pipeline` with `StandardScaler`, `confusion_matrix`, `roc_auc_score`, odds ratios
+      and a threshold table
+    - Run: open `src\mini-projects\Day09\churn-classifier\churn_classifier.ipynb` and Run All
+
+- [x] Day 10: Decision trees and Random Forest
+  - Decision tree: Gini impurity and entropy, information gain, greedy splits, and a leaf as the majority
+    class
+  - Why an unlimited tree memorises the training data, and how `max_depth`, `min_samples_split` and
+    `min_samples_leaf` limit it
+  - Random Forest: bootstrap samples, a random subset of features per split, and voting (bagging)
+  - Out-of-bag (OOB) score, `n_estimators`, and why more trees steady the forest but do not make it overfit
+  - Feature importance vs permutation importance, and why neither proves what causes churn
+  - Fair model comparison: same split and metric, choose on validation, score the test set once
+  - Mini-project: Random Forest vs Logistic Regression on Churn 
+                  (`src/mini-projects/Day10/churn-random-forest`)
+    - Reuses the Day 9 churn data and splits, then compares a baseline, one tree, a default forest, a tuned
+      forest and logistic regression
+    - Uses `RandomForestClassifier`, a `make_forest` helper, a parameter grid on validation, a threshold table
+      and `permutation_importance`
+    - Run: open `src\mini-projects\Day10\churn-random-forest\churn_random_forest.ipynb` and Run All

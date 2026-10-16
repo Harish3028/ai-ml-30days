@@ -93,7 +93,7 @@
     - Mini-project: Leakage-safe ML Workflow on Titanic (`src/mini-projects/Day07/`)
       - Runs the full workflow: split, baseline, model, evaluation, Pipeline and a deliberate leak check
       - Uses scikit-learn's `LogisticRegression` as a black box (studied on Day 9)
-      - Run: Open `src\mini-projects\Day07\ml-workflow\ml_workflow.ipynb` and Run All
+      - Run: Open `src\mini-projects\Day07\ml-workflow\ml_workflow_titanic.ipynb` and Run All
 
 - [x] Day 8: Regression & Linear Regression
   - Regression vs classification; `LinearRegression` with `.fit`, `.predict`, `.coef_` and `.intercept_`
@@ -141,3 +141,16 @@
     - Uses `RandomForestClassifier`, a `make_forest` helper, a parameter grid on validation, a threshold table
       and `permutation_importance`
     - Run: open `src\mini-projects\Day10\churn-random-forest\churn_random_forest.ipynb` and Run All
+
+- [x] Day 11: Overfitting and underfitting
+  - Underfitting (high bias) vs overfitting (high variance), and how to read the train vs validation gap
+  - Bias-variance tradeoff, the complexity curve and the learning curve ("would more data help?")
+  - Regularization: Ridge `alpha` (big alpha = strong penalty), and why it rescues an overfit model without
+    beating a simpler one
+  - The best complexity depends on how much data you have (rows per feature)
+  - Mini-project: Overfitting Detective (`src/mini-projects/Day11/overfitting-detective/`)
+    - Compares polynomial degrees 1 to 5 on 200 rows vs 11,805 rows of California housing, then a learning
+      curve, a Ridge sweep and a variance test
+    - Uses `PolynomialFeatures`, `StandardScaler`, `LinearRegression`, `Ridge`, a `take` helper and repeated
+      sampling
+    - Run: open `src\mini-projects\Day11\overfitting-detective\overfitting_detective.ipynb` and Run All

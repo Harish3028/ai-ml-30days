@@ -154,3 +154,40 @@
     - Uses `PolynomialFeatures`, `StandardScaler`, `LinearRegression`, `Ridge`, a `take` helper and repeated
       sampling
     - Run: open `src\mini-projects\Day11\overfitting-detective\overfitting_detective.ipynb` and Run All
+
+- [x] Day 12: Model improvement
+  - K-fold and stratified K-fold cross-validation: `cross_val_score`, `cross_validate` and
+    `cross_val_predict`, mean +- std, and the tie rule (one standard error)
+  - Scaling: who needs it (KNN yes, logistic regression barely, forests no), and feature selection with
+    `SelectKBest` inside the `Pipeline` so it never sees the validation rows
+  - Hyperparameters (`max_depth`, `min_samples_leaf`, `n_estimators`, `max_features`),
+    `GridSearchCV` vs `RandomizedSearchCV`, and `best_estimator_`
+  - Choosing a threshold on out-of-fold predictions and scoring the test set once
+  - Mini-project: Forest Tuning Lab (`src/mini-projects/Day12/forest-tuning-lab/`)
+    - Rules written before any search, then a 16-setting grid, one-at-a-time checks and a random search on
+      the churn data; the forest vs logistic regression ends in a tie, so logistic regression is shipped
+    - Uses `StratifiedKFold`, `GridSearchCV`, `RandomizedSearchCV`, a `cv` helper, a tie band and a
+      bootstrap check of the test AUC gap
+    - Run: open `src\mini-projects\Day12\forest-tuning-lab\forest_tuning_lab.ipynb` and Run All
+  - Recall project: Adult Playbook (`src/mini-projects/recall/recall-day1-day12/`)
+    - Takes the Adult Census data from raw file to a tested model in 10 stages: clean, decide columns,
+      split, encode, compare, tune and test once
+    - Uses `Pipeline`, `cross_validate`, `GridSearchCV`, `permutation_importance` and a check of results
+      by sex
+    - Run: open `src\mini-projects\recall\recall-day1-day12\adult_playbook.ipynb` and Run All
+
+- [x] Day 13: PyTorch fundamentals
+  - Tensors: `shape`, `dtype` and `device`, creating them (`torch.tensor`, `zeros`, `arange`, `linspace`,
+    `rand`), `reshape`, indexing, broadcasting and `@` (matrix multiply)
+  - The three checks on every tensor (shape, dtype, device) and the error each one causes; CPU vs GPU with
+    `.to(device)`; the NumPy bridge (`from_numpy` shares memory, `.clone()` makes a copy)
+  - Autograd: `requires_grad`, `backward()` and `.grad`, why gradients accumulate (`zero_()`),
+    `torch.no_grad()` and `detach()`; gradient descent by hand on a line, checked against `np.polyfit`
+  - `Dataset` (`__len__` and `__getitem__`) and `DataLoader` (`batch_size`, `shuffle`, `drop_last`), and
+    what an epoch and a batch are
+  - Mini-project: Churn DataLoader Lab (`src/mini-projects/Day13/dataloader-lab/`)
+    - Turns the 7,043-customer churn table into float32 tensors (train-only median and `StandardScaler`),
+      wraps them in a `Dataset` and serves 89 training batches of 64 with a `DataLoader`
+    - Uses `StandardScaler`, `torch.tensor`, a `PairDataset` class, `DataLoader`, a rows-and-churners
+      check every epoch and one `backward()` on a real batch
+    - Run: open `src\mini-projects\Day13\dataloader-lab\dataloader_lab.ipynb` in Google Colab and Run All

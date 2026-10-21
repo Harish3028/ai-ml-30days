@@ -191,3 +191,23 @@
     - Uses `StandardScaler`, `torch.tensor`, a `PairDataset` class, `DataLoader`, a rows-and-churners
       check every epoch and one `backward()` on a real batch
     - Run: open `src\mini-projects\Day13\dataloader-lab\dataloader_lab.ipynb` in Google Colab and Run All
+
+- [x] Day 14: Neural networks with PyTorch
+  - A neuron (weighted sum + bias + activation), a layer as many neurons side by side, and `nn.Linear` weight
+    shape `(out_features, in_features)`
+  - Activation functions: ReLU, sigmoid and softmax, and why layers need an activation (two linear layers
+    in a row collapse into one)
+  - Forward pass, loss (`MSELoss`, `BCEWithLogitsLoss` on raw logits) and backpropagation checked by hand
+    (`p - y` at the output)
+  - `nn.Module` and `nn.Sequential`, an optimizer (`SGD`, `Adam`), and the five-line training step
+    (`zero_grad`, forward, loss, `backward`, `step`)
+  - A straight line cannot fit a curve, a hidden layer with ReLU can, and an unlucky random start can leave
+    the ReLU units dead
+  - Mini-project: Churn Neural Classifier (`src/mini-projects/Day14/churn-nn-classifier/`)
+    - Compares a single neuron (24 parameters), one hidden layer (401) and a bigger network (1,601) on the
+      churn data with a 60/20/20 split; the validation loss shows the bigger networks overfitting, so the
+      single neuron is chosen and the test set is opened once (AUC 0.832)
+    - Uses `nn.Linear`, `nn.Sequential`, `nn.ReLU`, `BCEWithLogitsLoss`, `Adam`, a `fit` helper and an
+      `evalm` helper, with the median and `StandardScaler` fitted on the training rows only
+    - Run: open `src\mini-projects\Day14\churn-nn-classifier\churn_nn_classifier.ipynb` in Google Colab and
+      Run All

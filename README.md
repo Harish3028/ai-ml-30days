@@ -211,3 +211,17 @@
       `evalm` helper, with the median and `StandardScaler` fitted on the training rows only
     - Run: open `src\mini-projects\Day14\churn-nn-classifier\churn_nn_classifier.ipynb` in Google Colab and
       Run All
+
+- [x] Day 15: Training neural networks
+  - Epoch, batch and batch size (updates per epoch = ceil(rows / batch size), e.g. 4,225 rows with batch
+    size 64 gives 67 updates), and mini-batch vs full-batch training
+  - Learning rate as the size of each weight update (too big overshoots, too small is slow), and how
+    SGD, SGD with momentum, Adam and AdamW differ
+  - The training loop (`model.train()`, `zero_grad`, `backward`, `step`) vs the validation loop
+    (`model.eval()`, `torch.no_grad()`, no weight updates), written as one `run_epoch` function that
+    weights each batch loss by `len(yb)` and returns loss and AUC
+  - A `train_model` helper that keeps a history of train loss, validation loss and validation AUC
+  - Reading loss curves: train loss falls while validation loss turns up (overfitting); best epoch 11
+    (validation loss 0.4367, then 0.4545 by epoch 40), a preview of early stopping on Day 17
+  - Checking a metric that looks too good: a validation AUC computed on only the last batch because
+    the prediction lists were emptied every batch

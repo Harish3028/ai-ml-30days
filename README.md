@@ -225,3 +225,63 @@
     (validation loss 0.4367, then 0.4545 by epoch 40), a preview of early stopping on Day 17
   - Checking a metric that looks too good: a validation AUC computed on only the last batch because
     the prediction lists were emptied every batch
+
+- [x] Day 16: PyTorch project: image classification
+  - Multiclass classification: 10 logits, softmax, `CrossEntropyLoss` on raw logits with `long` labels of
+    shape `(N,)`, and an untrained model starting near ln(10) = 2.3026
+  - `model.train()`, `model.eval()` and `torch.no_grad()`; accuracy with `argmax`, a confusion matrix and
+    per-class recall
+  - `state_dict`: `torch.save` and `load_state_dict` into the same architecture, and the trap that
+    `state_dict()` returns references (use `copy.deepcopy` to keep the best epoch)
+  - Mini-project: Digit Classifier (`src/mini-projects/Day16/digit-classifier/`)
+    - Classifies the 1,797 handwritten 8x8 digit images (60/20/20 split, pixels divided by 16) with a custom
+      `Dataset` and `DataLoader`; compares a single layer (650 parameters), one hidden layer (4,810) and two
+      hidden layers (17,226); the tie rule chooses the one-hidden-layer model (validation accuracy 0.975),
+      which is saved and reloaded, then the test set is opened once (accuracy 0.9639)
+    - Uses `Dataset`, `DataLoader`, `nn.Linear`, `nn.ReLU`, `CrossEntropyLoss`, `Adam`, `run_epoch` and
+      `train_model` helpers, `confusion_matrix` and a plot of the misclassified images
+    - Run: open `src\mini-projects\Day16\digit-classifier\digit_classifier.ipynb` in Google Colab and Run All
+
+- [x] Day 17: Deep learning problems
+  - Overfitting in a network vs a forest: capacity (rows per parameter), time (epochs) and many knobs,
+    judged by loss curves
+  - Dropout (`nn.Dropout`, switched off by `model.eval()`), weight decay (`AdamW` shrinks the weights
+    separately from Adam's step), early stopping (patience, restore the best weights), learning-rate
+    schedulers (`StepLR`, `ReduceLROnPlateau`) and data augmentation (noise and shifts, training set only)
+  - Mini-project: Regularisation Lab (`src/mini-projects/Day17/regularisation-lab/`)
+    - Takes the overfitting two-hidden-layer digit network from Day 16 and changes one thing at a time; a
+      change counts only if the best validation loss is more than 10% below the baseline (0.0731); noise 0.1
+      wins (0.0388), dropout 0.3 and AdamW 0.1 help, the wrap-around shift and weight decay 1.0 hurt, and
+      stacking regularisers did not add up; the test set stays closed
+    - Uses `nn.Dropout`, `AdamW`, `StepLR`, `ReduceLROnPlateau`, an `AugDataset` class and a `train_model2`
+      helper with patience and a scheduler
+    - Run: open `src\mini-projects\Day17\regularisation-lab\regularisation_lab.ipynb` in Google Colab and
+      Run All
+  - Recall project: House Prices (`src/mini-projects/recall2/recall-day1-day17/`)
+    - Takes the house prices data (1,460 houses) from raw file to a tested model in 11 stages: clean and decide
+      which missing values are real, split and remove two outliers from the training part only, compare
+      Ridge, a forest, XGBoost and a PyTorch regression network, and open the test set once (Ridge chosen by
+      the tie rule; RMSE 0.1278 on the log price, R2 0.912, typical error 5.5%)
+    - Uses `Pipeline`, `SimpleImputer`, `Ridge`, `RandomForestRegressor`, `XGBRegressor` (early stopping and
+      importances), `KFold`, a tie rule, `nn.Sequential` with `MSELoss`, `AdamW` and dropout, and an error
+      table by house quality
+    - Run: open `src\mini-projects\recall2\recall-day1-day17\house_prices_playbook.ipynb` and Run All; the
+      network stage is `house_prices_playbook_stage_10.ipynb` in Google Colab
+
+- [x] Day 18: CNN and transfer learning
+  - Convolution as a sliding window of shared weights: a kernel on a window (multiply and add), padding,
+    stride, the output-size formula `floor((n + 2p - k) / s) + 1`, max pooling, and the CNN recipe
+    (Conv, ReLU, Pool, Flatten, Linear) on tensors of shape `(N, C, H, W)`, with parameter counts checked by
+    hand (`Conv2d(1, 8, 3)` has 80)
+  - A `conv2d` function written with two loops in NumPy and checked against hand-computed tables
+  - A small CNN on the Day 16 digits (1,370 parameters) ties the 4,810-parameter network (test accuracy
+    0.9667 against 0.9639, a difference of one image)
+  - Mini-project: Ants or Bees (`src/mini-projects/Day18/cnn-project/`)
+    - Compares a pretrained ResNet-18 used as a feature extractor (1,026 trainable parameters), the same
+      network fine-tuned (`layer4` and `fc`, 8.4 million) and a copy without pretraining, on 244 training
+      and 153 validation photos; the first two tie (0.9608 and 0.9542), the run without pretraining reaches
+      only 0.6536 (always guessing the majority class gives 0.5425), so the feature extractor is chosen
+    - Uses `ImageFolder`, `transforms` (ImageNet mean and std, random crop and flip for training only),
+      `models.resnet18`, freezing with `requires_grad`, `Adam` with two learning rates, and a `run_epoch`
+      helper that keeps BatchNorm in eval mode
+    - Run: open `src\mini-projects\Day18\cnn-project\cnn_project.ipynb` in Google Colab (T4 GPU) and Run All

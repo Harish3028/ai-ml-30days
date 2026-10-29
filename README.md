@@ -285,3 +285,38 @@
       `models.resnet18`, freezing with `requires_grad`, `Adam` with two learning rates, and a `run_epoch`
       helper that keeps BatchNorm in eval mode
     - Run: open `src\mini-projects\Day18\cnn-project\cnn_project.ipynb` in Google Colab (T4 GPU) and Run All
+
+- [x] Day 19: NLP foundations
+  - Text to numbers: preprocessing, tokenization (word, character, subword), a vocabulary with `<PAD>` and
+    `<UNK>`, Bag of Words with cosine similarity, TF-IDF (`tf x ln(N / df)`), embeddings as a learned table
+    (`nn.Embedding`), padding with an attention mask, and the idea of attention (softmax, then a weighted sum),
+    all worked by hand on a four-sentence corpus
+  - `build_vocab`, `to_ids` and `bow` written with loops and dictionaries
+  - Mini-project: Spam or Ham (`src/mini-projects/Day19/text-classifier/`)
+    - Takes 5,572 SMS messages (13.4% spam) from raw text to a tested spam detector; accuracy is misleading
+      (always guessing ham scores 0.866), so F1 on the spam class is used; five TF-IDF + logistic regression
+      variants are compared by cross-validation with the tie rule, next to an embedding-average network in
+      PyTorch; `tfidf + LR balanced, C=10` is chosen before the test set is opened (test F1 0.9485, precision
+      0.9718, recall 0.9262)
+    - Uses `TfidfVectorizer`, `CountVectorizer`, `Pipeline`, `StratifiedKFold`, `cross_validate`,
+      `nn.Embedding` with `padding_idx`, a masked average and `BCEWithLogitsLoss`
+    - Run: open `src\mini-projects\Day19\text-classifier\text_classifier.ipynb` and Run All (an internet
+      connection is needed to read the data)
+
+- [x] Day 20: Transformers
+  - Self-attention with query, key and value (`softmax(Q K^T / sqrt(d_k)) V`), why the scores are divided by
+    `sqrt(d_k)`, multi-head attention, positional encoding (sinusoidal and learned), the transformer block
+    (attention, add and norm, feed-forward, add and norm), encoder versus decoder and the causal mask; the
+    parameters of one block counted by hand (872)
+  - Attention and positional encoding written in NumPy and checked against hand-computed tables, including a
+    shuffle test
+  - Mini-project: Tiny Transformer (`src/mini-projects/Day20/tiny-transformer/`)
+    - Builds one self-attention block in PyTorch (checked against the hand-computed attention; 115,329
+      parameters), trains it on the same SMS data and compares it with the Day 19 models on the validation
+      split; it does not beat the averaging network or TF-IDF (F1 0.895 to 0.911, validation loss 0.083 to
+      0.108), so the Day 19 choice stands and the test set stays closed; one empty message turned the softmax
+      into `nan` until `encode` was fixed
+    - Uses a `SelfAttention` layer, a `Block` with `nn.LayerNorm` and a feed-forward network, position
+      vectors from `nn.Embedding`, and the attention table to see which words a spam message attended to
+    - Run: open `src\mini-projects\Day20\tiny-transformer\tiny_transformer.ipynb` and Run All (an internet
+      connection is needed to read the data)

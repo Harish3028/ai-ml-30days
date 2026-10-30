@@ -320,3 +320,21 @@
       vectors from `nn.Embedding`, and the attention table to see which words a spam message attended to
     - Run: open `src\mini-projects\Day20\tiny-transformer\tiny_transformer.ipynb` and Run All (an internet
       connection is needed to read the data)
+
+- [x] Day 21: LLM fundamentals and prompt engineering
+  - Decoder-only next-token prediction, parameters and memory (12 N d^2 + V d), tokens (BPE) and the context window,
+    pretraining loss and perplexity, instruction and preference tuning, hallucination and the knowledge cutoff,
+    temperature / top-p / top-k, the KV cache; the API as a stateless call (system, user and assistant messages),
+    few-shot examples, structured JSON output and the tool-calling loop
+  - Mini-project: Invoice Assistant (`src/mini-projects/Day21/invoice-assistant/`)
+    - Extracts `invoice_no`, `total`, `currency` and `due_date` from invoice text with a system prompt and a few-shot
+      example, cuts the JSON out of the reply (`find` / `rfind` / `json.loads`), checks the values with `re.fullmatch`,
+      and retries once by sending the model its own bad reply and the list of problems; a missing due date comes
+      back as null, and an invoice that wrote `RM` returned `RM` until the prompt asked for an ISO 4217 code (`MYR`)
+    - A tool-calling loop with a practice `get_exchange_rate` function (the model asks, the code runs the tool, the
+      result goes back) and a chat that keeps its own history, because the API forgets
+    - Findings: temperature 0 did not give identical replies, so the output is validated in code; the free Gemini tier
+      allowed 5 requests per minute and 20 per day per model, so the calls are paced and cached
+    - Run: add `GEMINI_API_KEY` to a `.env` file (never commit it), open
+      `src\mini-projects\Day21\invoice-assistant\invoice_assistent.ipynb` and run the cells in order; the free tier's
+      daily limit means a full run may need a second model name

@@ -338,3 +338,59 @@
     - Run: add `GEMINI_API_KEY` to a `.env` file (never commit it), open
       `src\mini-projects\Day21\invoice-assistant\invoice_assistent.ipynb` and run the cells in order; the free tier's
       daily limit means a full run may need a second model name
+
+- Converted to a project: tender-rfq-synthesizer
+
+- [x] Day 22: Embeddings and vector search
+  - Text to vectors (384 numbers per sentence), cosine similarity, normalising a vector so that cosine equals the dot
+    product (and the squared distance equals `2 - 2 cos`), exact semantic search in four NumPy lines, FAISS
+    (`IndexFlatIP`, `float32`, a 2-D query, ids are positions), FAISS versus Chroma versus Qdrant, metadata and the
+    pre-filter versus post-filter trap, and the limits of embeddings (negation, exact IDs)
+  - Notebook: `notebooks/Day22/day22.ipynb` (paper exercises E1 to E3, NumPy and FAISS searches that match, a
+    post-filter that returns nothing, and a four-line search written from memory)
+  - Mini-project: Tender evidence search (in the separate `tender-rfq-synthesizer` repository)
+    - Searches 30 approved evidence chunks of a fictional company with `all-MiniLM-L6-v2` and a FAISS
+      `IndexFlatIP`, keeping only `approved` chunks (draft and superseded ones are ignored)
+    - Measured with 25 labelled questions split into 16 dev and 9 test, using Hit@k, Recall@k and MRR; on the dev
+      split Hit@3 is 1.00, Recall@3 0.97 and MRR 0.91; the failures are written up (negation ignored, "lead"
+      matching a job title, a question that avoids the key word); the test split stays closed until the end
+
+- [x] Day 23: Retrieval-augmented generation (RAG)
+  - Retrieve, augment, generate; the offline phase (parse, chunk, embed, index) versus the online phase (embed the
+    query, search, build the prompt, call the model, validate); the prompt as a contract (use only the context, a way
+    out for "not found", chunk ids, structured JSON, checked in code); evaluating retrieval and generation
+    separately, and debugging retrieval first
+  - Notebook: `notebooks/Day23/day23.ipynb`
+  - Mini-project: the tender judge (in `tender-rfq-synthesizer`)
+    - For each requirement it retrieves 5 chunks and returns a `RequirementVerdict` (`supported`, `unsupported`,
+      `partial` or `not_found`, a reason and the cited chunk ids), validated with Pydantic; `find_problems` rejects
+      a cited id that was not retrieved, a missing citation and a requirement id that does not match the request
+    - On 13 sample requirements: verdict accuracy 13/13, citation hit 13/13, invalid citations 0, errors 0; R04
+      cites three of four project chunks because retrieval missed one, R11 overclaims, and R01 gave different
+      reason text at temperature 0
+    - Load and chunk, added afterwards: a PDF page loader, a fixed-size chunker (cuts words) and a sentence-aware
+      chunker with overlap, 30 chunks from 12 PDFs, a token count with the embedding model's own tokenizer (largest
+      chunk 69 tokens of 256, about 4.2 characters per token) with a warning guard, and a document register where an
+      unknown document defaults to `draft`
+    - Retrieval re-measured on the new chunks with page labels (`insurance.pdf#1`): the repeated page header lowered
+      Hit@1 from 0.81 to 0.69 and MRR from 0.91 to 0.83, and removing it restored both
+    - Run: `uv run python -m scripts.run_ingest`, `uv run python -m scripts.eval_new_chunks`,
+      `uv run python -m scripts.run_judge`, `uv run python -m scripts.score_judge`
+
+- [x] Day 24: LangChain
+  - LangChain as a set of standard blocks with one interface: Document, Embeddings, vector store, retriever, prompt
+    template, chat model, output parser, and the `|` pipe (LCEL); what each block replaces in the hand-written
+    pipeline, and when a senior engineer is careful about the library (it changes fast and hides what happens)
+  - Notebook: `notebooks/Day24/day24_part1.ipynb`
+  - Mini-project: the same tender pipeline rebuilt with LangChain (in `tender-rfq-synthesizer/experiments/`)
+    - A FAISS retriever returns the same chunks as the hand-written index on all 13 requirements; a judge chain
+      (`ChatPromptTemplate | model.with_structured_output(RequirementVerdict)`) scores 13/13 on verdicts and
+      citations, the same as the hand-written judge, and `find_problems` still checks every answer
+    - A question-answering chain returns an answer, a `found` flag and cited chunk ids, and answers "I don't know
+      based on the documents" when the evidence has no answer
+    - Finding: LangChain warns that `gemini-3.5-flash-lite` ignores the `temperature` setting, which fits the
+      repeat-run differences seen earlier, so answers are validated in code and compared by verdict and citation,
+      not by wording
+    - Run: `uv run python -m experiments.run_langchain_judge`,
+      `uv run python -m scripts.score_judge --run evals/runs/langchain_judge_run1.jsonl`,
+      `uv run python -m experiments.langchain_qa` (needs `TENDER_GEMINI_API_KEY` in `.env`, never committed)

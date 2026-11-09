@@ -394,3 +394,22 @@
     - Run: `uv run python -m experiments.run_langchain_judge`,
       `uv run python -m scripts.score_judge --run evals/runs/langchain_judge_run1.jsonl`,
       `uv run python -m experiments.langchain_qa` (needs `TENDER_GEMINI_API_KEY` in `.env`, never committed)
+
+- [x] Day 25: LangGraph
+  - LangGraph as a state machine: a shared `TypedDict` state, nodes that return only the keys they change, `START` and
+    `END` markers, edges, and conditional edges where a route function returns the next node name; the retry loop
+    needs an `attempts` counter so it cannot run forever
+  - Mini-project: the tender judge as a LangGraph workflow (in `tender-rfq-synthesizer/app/rag/graph.py`)
+    - Flow: retrieve, judge, validate, then end, retry (up to 2 attempts) or `needs_review`; `build_graph` takes the
+      retrieve and judge functions as arguments, so tests use a fake judge and the real run uses `ask_judge`
+    - Three tests cover the paths (ok on the first try, ok after a retry, `needs_review`); no API or embedding model
+    - `status: ok` means the answer passed our checks, not that the requirement is met; a negative verdict such as
+      `unsupported` is a valid answer
+    - Run on the new PDF chunks (30 chunks, document register, expected answers relabelled by page): 12/13 verdicts,
+      13/13 citation hits, 0 invalid citations, 0 `needs_review`, 0 errors
+    - The one miss (R04, "at least three projects") is a retrieval miss: `projects-p2` ranks 7th, so the judge sees only
+      two qualifying projects; page recall is 0.981 at k=5 and 1.000 at k=7, and R04 stays the standing test case
+      for hybrid search and a reranker
+    - Run: `uv run python -m scripts.run_judge_v2`,
+      `uv run python -m scripts.score_judge --run evals/runs/judge_v2_graph_run1.jsonl --expected evals/judge_expected_v2.jsonl`,
+      `uv run python -m scripts.eval_judge_retrieval` (needs `TENDER_GEMINI_API_KEY` in `.env` for the first, never committed)
